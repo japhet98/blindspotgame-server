@@ -102,7 +102,7 @@ export default class GameController{
         message:"Question fetched successfully."
       })
      } catch (error:any) {
-        res.status(40).json({message:error?.message});
+        res.status(400).json({message:error?.message});
      }
     }
 
