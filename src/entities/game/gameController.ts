@@ -2,12 +2,17 @@ import { roundService } from './../round/roundService';
 import {Request,Response,NextFunction} from 'express';
 import { itunesService } from '../itunesAPI/itunesService';
 import { gameService } from './gameService';
+import mongoose from 'mongoose';
+const requestIp = require('request-ip');
+
 
 export default class GameController{
 
      static async createGame(req:Request,res:Response,next:NextFunction){
        try {
-        const ipAddress = req.ip;
+        const clientIp = requestIp.getClientIp(req); 
+
+        const ipAddress = clientIp;
         const {artistId} = req.body;
         const game = await gameService.createGame({ipAddress,artistId});
         res.status(200).json({message:"Game created successfully", data:game});
@@ -75,6 +80,9 @@ export default class GameController{
     static async loadGamesWithQuestions(req:Request,res:Response,next:NextFunction){
      try {
         const {gameId} = req.params;
+
+        const isId = new mongoose.Types.ObjectId(gameId);
+        
         let albums:any
         const game = await gameService.getbyGameId(gameId);
     if(game!== null){
@@ -102,7 +110,7 @@ export default class GameController{
         message:"Question fetched successfully."
       })
      } catch (error:any) {
-        res.status(400).json({message:error?.message});
+        res.status(400).json({data:[]});
      }
     }
 
