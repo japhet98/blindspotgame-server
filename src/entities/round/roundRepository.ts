@@ -8,39 +8,39 @@ class RoundRepository{
         this.roundModel = RoundModel;
     }
 
-    public async create(params:CreateRound){
-        return await this.roundModel.create(params)
+    public  create(params:CreateRound){
+        return  this.roundModel.create(params)
     }
 
-    public async findById(id:ID){
-        return await this.roundModel.getById(id);
+    public  findById(id:ID){
+        return  this.roundModel.getById(id);
     }
-    public async findOne(params:object={}){
-        return await this.roundModel.findOne(params)
+    public  findOne(params:object={}){
+        return  this.roundModel.findOne(params)
     }
-    public async findMany(params:object={}){
-        return await this.roundModel.find(params);
+    public  findMany(params:object={}){
+        return  this.roundModel.find(params);
     }
-    public async deleteOne(params:object){
-        return await this.roundModel.updateOne(params,{
+    public  deleteOne(params:object){
+        return  this.roundModel.updateOne(params,{
             $set: {isDelete:true}
         })
     }
-    public async count(params:object={}){
-        return await this.roundModel.count(params);
+    public  count(params:object={}){
+        return  this.roundModel.count(params);
     }
-    public async deleteMany(params:object){
-        return await this.roundModel.updateMany(params,{
+    public  deleteMany(params:object){
+        return  this.roundModel.updateMany(params,{
             $set: {isDelete:true}
         })
              }
-    public async updateOne(criteria:object,params:CreateRound){
-        return  await this.roundModel.updateOne(criteria,{
+    public  updateOne(criteria:object,params:CreateRound){
+        return   this.roundModel.updateOne(criteria,{
             $set: params
         })
     }
-    public async updateMany(criteria:object,params:CreateRound){ 
-           return await this.roundModel.updateMany(criteria,{
+    public  updateMany(criteria:object,params:CreateRound){ 
+           return  this.roundModel.updateMany(criteria,{
             $set: params
         })
          }
@@ -54,39 +54,39 @@ class RoundAttemptRepository{
         this.roundAttemptModel = RoundAttemptModel;
     }
 
-    public async create(params:CreateRoundAttempt){
-        return await this.roundAttemptModel.create(params)
+    public  create(params:CreateRoundAttempt){
+        return  this.roundAttemptModel.create(params)
     }
 
-    public async findById(id:ID){
-        return await this.roundAttemptModel.getById(id);
+    public  findById(id:ID){
+        return  this.roundAttemptModel.getById(id);
     }
-    public async findOne(params:object={}){
-        return await this.roundAttemptModel.findOne(params)
+    public  findOne(params:object={}){
+        return  this.roundAttemptModel.findOne(params)
     }
-    public async findMany(params:object={}){
-        return await this.roundAttemptModel.find(params);
+    public  findMany(params:object={}){
+        return  this.roundAttemptModel.find(params);
     }
-    public async count(params:object={}){
-        return await this.roundAttemptModel.count(params);
+    public  count(params:object={}){
+        return  this.roundAttemptModel.count(params);
     }
-    public async deleteOne(params:object){
-        return await this.roundAttemptModel.updateOne(params,{
+    public  deleteOne(params:object){
+        return  this.roundAttemptModel.updateOne(params,{
             $set: {isDelete:true}
         })
     }
-    public async deleteMany(params:object){
-        return await this.roundAttemptModel.updateMany(params,{
+    public  deleteMany(params:object){
+        return  this.roundAttemptModel.updateMany(params,{
             $set: {isDelete:true}
         })
              }
-    public async updateOne(criteria:object,params:CreateRoundAttempt){
-        return  await this.roundAttemptModel.updateOne(criteria,{
+    public  updateOne(criteria:object,params:CreateRoundAttempt){
+        return   this.roundAttemptModel.updateOne(criteria,{
             $set: params
         })
     }
-    public async updateMany(criteria:object,params:CreateRoundAttempt){ 
-           return await this.roundAttemptModel.updateMany(criteria,{
+    public  updateMany(criteria:object,params:CreateRoundAttempt){ 
+           return  this.roundAttemptModel.updateMany(criteria,{
             $set: params
         })
          }

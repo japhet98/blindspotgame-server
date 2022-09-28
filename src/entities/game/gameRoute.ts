@@ -1,6 +1,6 @@
 import { Application } from "express";
 import { Endpoints } from "../../contants/allEndpoints";
-import { IpAddressMiddleware } from "../Base/baseMiddleware";
+
 import GameController from "./gameController";
 
 module.exports = (app:Application) =>{

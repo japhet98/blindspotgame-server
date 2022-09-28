@@ -5,9 +5,11 @@ import { CreateRound, CreateRoundAttempt, UpdateRoundAttempt } from './roundType
 
 class RoundService{
 
-    roundRepository:any
-    constructor({roundRepository}:any){
+    roundRepository:any;
+    roundAttemptService:any;
+    constructor({roundRepository,roundAttemptService}:any){
         this.roundRepository = roundRepository;
+        this.roundAttemptService =roundAttemptService;
     }
     private getPoint(attemptedLevel:number){
         const pointMapper:any ={
@@ -32,18 +34,88 @@ class RoundService{
         return roundTypeMapper[roundCount];
     }
     
-    public async createRound(round:CreateRound){
+    public async createRound(_round:CreateRound){
        try {
-        const {attemptLevel} = round;
-        const response  = this.getPoint(attemptLevel);
-        console.log(response);
-        round.point = response.point;
-        round.isAnswered = response.isAnswered;
-        return this.roundRepository.create(round);
+        const {gameId,album,artistName} = _round;
+          //get all rounds for game {gameId};
+          const rounds = await this.getAllRounds({gameId});
+          const roundType =this.getRoundType(1+rounds?.length);
+               //check and count round attempt;
+               const roundCount = await this.countRounds({gameId});
+               if(roundCount===5) return [false,"Sorry, you have exhauted all five rounds for this game."]
+               const round = await this.getRound({$or:[
+                {$and:[{gameId},{roundType}]},
+                {$and:[{gameId},{albumId:album?.collectionId}]}
+              
+              ]});
+              if(round)return [false,`You have already answered a question in ${roundType}`];
+              
+              const currentAttempt = await this.roundAttemptService.getRoundAttempt({gameId,roundType});
+              let attemptId:any;
+              let attemptLevel:number;
+              if(currentAttempt === null){
+               //create new round attempt for this game;
+               attemptLevel =1;
+             const _respon=  await this.roundAttemptService.createRoundAttempt({
+                 gameId,
+                 attemptLevel,
+                 roundType
+               })
+               attemptId = _respon._id;
+              }
+              else{
+               attemptLevel=1+currentAttempt?.attemptLevel;
+               attemptId = currentAttempt._id;
+              }
+
+              const response  = this.getPoint(attemptLevel);
+             const point = response.point;
+             const isAnswered = response.isAnswered;
+            
+              //check if its not the last attempt;
+              if(album?.artistName !== artistName){
+                if(attemptLevel <3){
+                  
+           await this.roundAttemptService.updateRoundAttemptById(attemptId,{
+                  attemptLevel:attemptLevel
+                });
+          
+              return [false,"Sorry! You' got this attempt wrong. Try again."];
+                          }         
+                          else{
+                          
+                            //create new round;
+                            return this.roundRepository.create({
+                                gameId,
+                                albumId:album?.collectionId,
+                                roundType,
+                                attemptLevel,
+                                point:0,
+                                isAnswered,
+                              });
+  
+                   
+                          } 
+             }
+             else{
+  
+              ///Create new round;
+             
+              return this.roundRepository.create({
+                gameId,
+                albumId:album?.collectionId,
+                roundType,
+                attemptLevel,
+                point,
+                isAnswered,
+              });
+             }
+
        } catch (error:any) {
         throw error;
        }
     }
+    
 
    
 
@@ -133,5 +205,5 @@ class RoundAttemptService{
     }
 
 }
-export const roundService = new RoundService({roundRepository});
 export const roundAttemptService = new RoundAttemptService({roundAttemptRepository});
+export const roundService = new RoundService({roundRepository,roundAttemptService});

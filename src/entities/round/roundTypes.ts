@@ -1,7 +1,8 @@
 type CreateRound={
     gameId:string,
     attemptLevel:number,
-    albumId:number,
+    album:any,
+    artistName:string,
     roundType:string,
     point?:number,
     isAnswered?:boolean,
