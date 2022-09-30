@@ -73,7 +73,7 @@ class RoundService{
              const isAnswered = response.isAnswered;
             
               //check if its not the last attempt;
-              if(album?.artistName !== artistName){
+              if(album?.artistName?.toLowerCase() !== artistName.toLowerCase()){
                 if(attemptLevel <3){
                   
            await this.roundAttemptService.updateRoundAttemptById(attemptId,{
