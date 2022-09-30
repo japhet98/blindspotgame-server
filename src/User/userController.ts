@@ -1,5 +1,5 @@
 import {Request,Response,NextFunction} from 'express';
-import { gameService } from '../game/gameService';
+import { gameService } from '../Game/gameService';
 import { userService } from './userService';
 
 export default class UserController{

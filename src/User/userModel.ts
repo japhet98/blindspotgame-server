@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import baseSchema from '../Base/baseSchema';
+import baseSchema from '../Common/baseSchema';
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     username:{type:String, unique:true, required:true, lowercase:true},

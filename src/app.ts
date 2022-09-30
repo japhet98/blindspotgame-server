@@ -39,7 +39,7 @@ DBConfiguration.connectDB();
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-require("./entities/Base/bundleRout")(app);
+require("./Common/bundleRout")(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

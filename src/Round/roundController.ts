@@ -1,7 +1,6 @@
 import {Request,Response,NextFunction} from 'express';
-import { RoundType } from '../../contants/rounds';
-import { userService } from '../user/userService';
-import { roundService, roundAttemptService } from './roundService';
+
+import { roundService } from './roundService';
 export default class RoundController{
 
      static async createRound(req:Request,res:Response,next:NextFunction){

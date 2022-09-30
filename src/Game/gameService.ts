@@ -1,9 +1,9 @@
-import { itunesService } from './../itunesAPI/itunesService';
+import { itunesService } from '../ItunesAPI/itunesService';
 import  mongoose  from 'mongoose';
 import { gameRepository } from './gameRepository';
 import { CreateGame, UpdateGame } from './gameTypes';
 
-import { roundService } from './../round/roundService';
+import { roundService } from '../Round/roundService';
 
 class GameService{
 

@@ -1,4 +1,4 @@
-import { ID } from "../Base/baseType"
+import { ID } from "../Common/baseType"
 
 type CreateGame={
     ipAddress:string,

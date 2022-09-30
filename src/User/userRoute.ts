@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { Endpoints } from "../../contants/allEndpoints";
+import { Endpoints } from "../contants/allEndpoints";
 import UserController from "./userController";
 
 module.exports = (app:Application) =>{

@@ -1,4 +1,4 @@
-import { ID } from "../Base/baseType";
+import { ID } from "../Common/baseType";
 import { RoundModel ,RoundAttemptModel} from "./roundModel";
 import { CreateRound, CreateRoundAttempt } from "./roundTypes";
 

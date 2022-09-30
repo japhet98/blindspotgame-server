@@ -1,5 +1,5 @@
 import { Application } from "express";
-import { Endpoints } from "../../contants/allEndpoints";
+import { Endpoints } from "../contants/allEndpoints";
 import ItunesController from "./itunesController";
 
 module.exports = (app:Application) =>{

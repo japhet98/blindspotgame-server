@@ -1,5 +1,5 @@
-import  mongoose  from 'mongoose';
-import { AttemptLevel, RoundType, RoundTypesNumbs } from '../../contants/rounds';
+
+import { AttemptLevel,  RoundTypesNumbs } from '../contants/rounds';
 import { roundRepository,roundAttemptRepository } from './roundRepository';
 import { CreateRound, CreateRoundAttempt, UpdateRoundAttempt } from './roundTypes';
 
@@ -91,7 +91,7 @@ class RoundService{
                                 roundType,
                                 attemptLevel,
                                 point:0,
-                                isAnswered,
+                                isAnswered:false,
                               });
   
                    

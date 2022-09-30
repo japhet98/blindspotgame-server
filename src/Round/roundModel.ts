@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { AttemptLevel, RoundType } from '../../contants/rounds';
-import baseSchema from '../Base/baseSchema';
+import { AttemptLevel, RoundType } from '../contants/rounds';
+import baseSchema from '../Common/baseSchema';
 const Schema = mongoose.Schema;
 const RoundSchema = new Schema({
     point:{type:Number},

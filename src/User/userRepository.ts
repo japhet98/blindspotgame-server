@@ -1,4 +1,4 @@
-import { ID } from "../Base/baseType";
+import { ID } from "../Common/baseType";
 import { UserModel } from "./userModel";
 import { CreateUser } from "./userTypes";
 

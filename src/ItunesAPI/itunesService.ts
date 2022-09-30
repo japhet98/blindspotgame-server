@@ -1,6 +1,4 @@
 import axios from "axios";
-import IItunesInterface from "./itunesInteface";
-import _ from 'lodash';
 const itunesLookUpEndpoint = "https://itunes.apple.com/lookup";
 class ItunesService {
 
@@ -14,12 +12,13 @@ class ItunesService {
        }
 
     }
-    public async getArtists(artists:string="2541832,577675,909253,78500,115234"){
+    public async getArtists(artists:string="577675,909253,254183278500,115234"){
         try {
      const response =  await axios.get(`${itunesLookUpEndpoint}?id=${artists}`);
 
      return response.data?.results;
         } catch (error:any) {
+      
          throw error;
         }
      }
@@ -28,7 +27,7 @@ class ItunesService {
         
          const response = await axios.get(`${itunesLookUpEndpoint}?id=${artistId}&entity=album&limit=${limit}`);
        
-         return  this.getShaffuledData(response?.data?.results)?.slice(-3);
+         return  this.getRandom(response?.data?.results,3);
         } catch (error:any) {
          throw error;
         }
@@ -37,16 +36,37 @@ class ItunesService {
       try {
        const response = await this.getArtists();
    
-       return  this.getShaffuledData(response)?.[0];
+       return  this.getRandom(response,1)?.[0];
       } catch (error:any) {
        throw error;
       }
    }
-
-   public  getShaffuledData(data:any){
-     
-      return  _.shuffle(data);
-   }
+   private     AddMore(arr:any,count:number):any{
+      if(count<3 && count>0){
+          arr.push(arr[0]);
+        return   this.AddMore(arr,arr?.length);
+      }else{
+          return arr
+      }
+  }
+   private getRandom(arr:any, n:number) {
+      var result = new Array(n),
+          len = arr.length,
+          taken = new Array(len);
+      if (n > len)
+     {
+      const _res = this.AddMore(arr,arr.length);
+       this.getRandom(_res,_res?.length);
+         }
+      while (n--) {
+        
+            var x = Math.floor(Math.random() * len);
+            result[n] = arr[x in taken ? taken[x] : x];
+            taken[x] = --len in taken ? taken[len] : len;
+        
+      }
+      return result;
+  }
     
 }
 
