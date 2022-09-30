@@ -69,7 +69,7 @@ class GameService{
     }
     public async getCompletedGames(){
         try {
-            return this.gameRepository.findMany({isCompleted:true},"totalPoint","-1");
+            return this.gameRepository.findMany({isComplete:true},"totalPoint","-1");
         } catch (error:any) {
             throw error;
         }
